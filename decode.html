@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decoder</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <style>
+        body {
+            background-color: #333;
+            text-align: center;
+        }
+
+        .credits {
+            position: absolute;
+            top: 95%;
+            left: 50%;
+            -moz-transform: translateX(-50%) translateY(-50%);
+            -webkit-transform: translateX(-50%) translateY(-50%);
+            transform: translateX(-50%) translateY(-50%);
+        }
+
+
+        a {
+            color: #fff;
+        }
+
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -moz-transform: translateX(-50%) translateY(-50%);
+            -webkit-transform: translateX(-50%) translateY(-50%);
+            transform: translateX(-50%) translateY(-50%);
+        }
+
+        h1 {
+            color: #fff;
+            font-family: monospace;
+            font-size: 40px;
+        }
+
+        button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #468048;
+        }
+
+        input[type=text] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            display: inline-block;
+            border-radius: 5px;
+          }
+      
+          p {
+              color: #fff;
+              font-family: monospace;
+              font-size: large;
+          }
+    </style>
+    <link rel="manifest" href="manifest.json">
+
+</head>
+<body>
+    <p><a href="encode.html">Click here to go to encoder!</a></p>
+    <div class="container">
+        <script>
+            // Loop through each letter, get its index from nonjumbled
+            // then replace the letter with the letter from jumbled
+
+            // Create strings to turn into arrays
+            const nonjumbledstring = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYS1234567890 "
+            const jumbledstring = "avhVGASOpQHKELrnsbxkmegdqTtDFYMUcyiuNWlfRjBIPoJCzXwS1234567890 "
+
+            // Turn strings into arrays
+            const nonjumbled = nonjumbledstring.split("")
+            const jumbled = jumbledstring.split("")
+
+
+
+
+            function encode(input) {
+            
+                let output = ""
+            
+            
+                for (let i = 0; i < input.length; i++) {
+                    output = output + jumbledstring[nonjumbled.indexOf(input[i])]
+                }
+            
+                document.getElementById("Output").innerText = "Output: " + output
+            }
+
+            function decode(input) {
+            
+                let output = ""
+            
+            
+                for (let i = 0; i < input.length; i++) {
+                    output = output + nonjumbledstring[jumbled.indexOf(input[i])]
+                }
+            
+                document.getElementById("Output").innerText = "Output: " + output
+            
+            }
+
+
+            if ("serviceWorker" in navigator) {
+                // register service worker
+                navigator.serviceWorker.register("service-worker.js");
+            }
+
+
+        </script>
+        <h1>Decode</h1>
+        <input type="text" id="text">
+        <button onclick="decode(text.value)">Decode!</button>
+        <p id="Output"></p>
+    </div>
+
+    <div class="credits">
+        <p>Made by Marcus under MIT License, Dencode v1.1</a></p>
+    </div>
+    
+</body>
+</html>
